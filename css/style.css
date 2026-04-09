@@ -1,0 +1,272 @@
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  --color-pink:        #D9A0B8;
+  --color-pink-deep:   #C78AA0;
+  --color-cream:       #FBF7F2;
+  --color-navy:        #1E3660;
+  --color-navy-dark:   #162848;
+  --color-blue-mid:    #4A80A8;
+  --color-body-text:   #333333;
+
+  --font-display:      'Space Grotesk', sans-serif;
+  --font-body:         'Space Grotesk', sans-serif;
+
+  --photo-size:        clamp(200px, 40vw, 360px);
+  --panel-min-height:  100svh;
+}
+
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-body-text);
+  min-height: 100svh;
+}
+
+
+/* ============================================================
+   LAYOUT — SPLIT SCREEN
+   ============================================================ */
+.layout {
+  display: flex;
+  min-height: var(--panel-min-height);
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel--photo {
+  background-color: var(--color-pink);
+  background-image: radial-gradient(
+    ellipse at center,
+    #F0C4D8 0%,
+    var(--color-pink) 70%
+  );
+  padding: 3rem 2rem;
+}
+
+.panel--content {
+  background-color: var(--color-cream);
+  padding: 3rem 2.5rem;
+}
+
+
+/* ============================================================
+   PHOTO
+   ============================================================ */
+.photo-frame {
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.1s;
+}
+
+.profile-photo {
+  display: block;
+  width: var(--photo-size);
+  height: var(--photo-size);
+  object-fit: cover;
+  object-position: center top;
+
+  border-radius: 48% 52% 50% 50% / 46% 46% 54% 54%;
+  border: 6px solid var(--color-cream);
+  box-shadow:
+    0 8px 24px rgba(30, 54, 96, 0.18),
+    0 2px 6px  rgba(30, 54, 96, 0.10),
+    0 0  0 3px var(--color-pink-deep);
+}
+
+
+/* ============================================================
+   CONTENT
+   ============================================================ */
+.content-inner {
+  max-width: 420px;
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.25s;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  color: var(--color-pink-deep);
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.01em;
+}
+
+.bio {
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  line-height: 1.7;
+  color: var(--color-body-text);
+  margin-bottom: 2rem;
+}
+
+.link {
+  color: var(--color-blue-mid);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  text-decoration-color: var(--color-blue-mid);
+}
+
+
+/* ============================================================
+   BUTTON
+   ============================================================ */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background-color: var(--color-navy);
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: 100px;
+  border: 2px solid var(--color-navy);
+  transition:
+    background-color 0.2s ease,
+    color            0.2s ease,
+    border-color     0.2s ease,
+    transform        0.15s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--color-pink);
+  color: var(--color-navy);
+  border-color: var(--color-pink-deep);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--color-blue-mid);
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-frame,
+  .content-inner {
+    animation: none;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE — TABLET (stacks at ≤ 700px)
+   ============================================================ */
+@media (max-width: 700px) {
+  .layout {
+    flex-direction: column;
+    min-height: 100svh;
+  }
+
+  .panel--photo {
+    flex: 0 0 auto;
+    padding: 3rem 1.5rem 2.5rem;
+    background-position: center;
+  }
+
+  .profile-photo {
+    width: min(240px, 60vw);
+    height: min(240px, 60vw);
+  }
+
+  .panel--content {
+    flex: 1;
+    padding: 2.5rem 1.5rem 3rem;
+  }
+
+  .content-inner {
+    max-width: 100%;
+  }
+
+  .name {
+    font-size: clamp(2.4rem, 10vw, 3.2rem);
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE — VERY SMALL (< 380px, e.g. iPhone SE)
+   ============================================================ */
+@media (max-width: 380px) {
+  .panel--photo {
+    padding: 2rem 1rem 1.75rem;
+  }
+
+  .profile-photo {
+    width: 180px;
+    height: 180px;
+  }
+
+  .panel--content {
+    padding: 2rem 1.25rem 2.5rem;
+  }
+
+  .name {
+    font-size: 2.2rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
