@@ -32,7 +32,7 @@
     <p>This policy describes how the VS Points iOS app ("VS Points", "the app", "we", "us") handles information. The app is listed on the App Store as VS Points and appears as <strong>Points</strong> on your home screen — both names mean the same app. It is made by Sam Davis, an independent developer based in the United Kingdom.</p>
 
     <div class="doc-callout">
-      <p><strong>The short version:</strong> we have no accounts and never ask for your name, email or payment details. Your saved flights stay on your device. What does leave it — including how you use the app — is listed below, in full.</p>
+      <p><strong>The short version:</strong> you never create an account or sign in, and we never ask for your name, email or payment details. Your saved flights stay on your device. What does leave it — including how you use the app — is listed below, in full.</p>
     </div>
 
     <h2>What stays on your device</h2>
@@ -43,19 +43,31 @@
 
     <h2>What leaves your device</h2>
 
+    <h3>Your installation identifier</h3>
+
+    <p>The first time the app runs it creates a <strong>random identifier</strong> for your installation. It is not your name or your email address, and you never create an account or sign in to get one. It is held in your device's keychain, which means it survives deleting and reinstalling the app.</p>
+
+    <p>Everything described below that leaves your device is recorded against this identifier: your price alerts, your analytics activity, and the affiliate links you tap.</p>
+
+    <h3>Your Apple Account</h3>
+
+    <p>On its first launch that can reach us, the app also sends Apple's signed <strong>app transaction</strong> for your installation to our server. Apple issues an app transaction to every installation of an app, whether or not anything has ever been purchased. Our server verifies it with Apple and records the identifier it contains — Apple's <code>appTransactionId</code> — against the installation identifier above.</p>
+
+    <p>That identifier is assigned by Apple and is tied to the Apple Account that downloaded the app. It is not your Apple Account itself, your name, or your email address, and it gives us no access to your Apple Account. We hold it so that a Points Plus subscription bought on your Apple Account can be matched to your installation — which is how our servers know whether your subscription is active when they decide whether to send you a notification.</p>
+
     <h3>Flight searches</h3>
 
-    <p>Reward seat availability is served from our own database, and a search reads from it rather than writing to it. The search is still recorded in our analytics, however: the routes, dates and cabin classes you searched for are sent to the providers listed under <strong>Analytics</strong> below, against the installation identifier described there.</p>
+    <p>Reward seat availability is served from our own database, and a search reads from it rather than writing to it. The search is still recorded in our analytics, however: the routes, dates and cabin classes you searched for are sent to the providers listed under <strong>Analytics</strong> below, against the installation identifier described above.</p>
 
     <p>As with any internet request, our hosting provider (Google, see below) processes technical connection data such as your IP address in order to serve the response.</p>
 
     <h3>Price alerts and notifications</h3>
 
-    <p>If — and only if — you create a price alert, the app sends the following to our database so that our servers can check prices while the app is closed and notify you:</p>
+    <p>Once you allow notifications — which the app asks for when you create your first alert — a <strong>push notification token</strong> issued by Apple is stored against your installation identifier, so that a notification can reach your device. It is replaced whenever Apple issues a new one, and it stays on our servers until then. Deleting your alerts does not remove it.</p>
+
+    <p>If — and only if — you create a price alert, the app also sends the following to our database, so that our servers can check prices while the app is closed and notify you:</p>
 
     <ul>
-      <li>A <strong>random identifier</strong> for your installation, created the first time the app runs. This is not your name, your Apple Account, or any identifier assigned by Apple. It is held in your device's keychain, which means it survives deleting and reinstalling the app.</li>
-      <li>A <strong>push notification token</strong> issued by Apple, so the notification can reach your device</li>
       <li>The <strong>routes, dates and cabin classes</strong> the alert watches</li>
       <li>The <strong>alert's trigger and frequency</strong> settings, and the last prices we saw, so we can tell when something has changed</li>
     </ul>
@@ -70,7 +82,7 @@
 
     <p>The app uses <strong>PostHog</strong>, hosted in the European Union, and <strong>Firebase Analytics</strong> for product analytics. Both receive the same events, recorded against the installation identifier described above, so that activity from a single installation can be followed over time.</p>
 
-    <p>These events describe how the app is used: the app being opened, the screens you visit, searches performed and how many results they returned, flights viewed and saved, alerts created and removed, booking links opened, paywalls shown, and subscriptions started, cancelled or lapsed. Search events include the <strong>routes, dates and cabin classes</strong> you searched for.</p>
+    <p>These events describe how the app is used: the app being opened, finishing the welcome screen, the screens you visit, searches performed and how many results they returned, how you sort them, flights viewed and saved, price history ranges opened, alerts created and removed, whether you allowed notifications and when you tap one, booking links opened, paywalls shown, and subscriptions started, cancelled or lapsed. Search events include the <strong>routes, dates and cabin classes</strong> you searched for.</p>
 
     <p>We also record a handful of properties describing the installation itself: whether you subscribe to Points Plus and on which plan, how many flights you have saved, how many alerts you have, and whether you have allowed notifications.</p>
 
@@ -80,15 +92,15 @@
 
     <h3>Crash and error reporting</h3>
 
-    <p>The app uses <strong>Firebase Crashlytics</strong> to report crashes and handled errors, so that failures can be found and fixed. These reports include technical information such as your device model, iOS version, and where in the app the failure occurred.</p>
+    <p>The app uses <strong>Firebase Crashlytics</strong> to report crashes and handled errors, so that failures can be found and fixed. These reports include technical information such as your device model, iOS version, and where in the app the failure occurred. When an intelligent search fails, the report also carries the model's raw response, which can repeat back part of what you typed.</p>
 
     <h3>Booking links</h3>
 
-    <p>When you tap through to book a flight, the app opens Virgin Atlantic's website through <strong>CJ Affiliate</strong>, an affiliate network. This link carries the random analytics identifier described above, so that a completed booking can be matched to the journey that led to it. We may earn a commission on bookings made this way, at no extra cost to you. Once you arrive on Virgin Atlantic's website, their own privacy policy applies to anything you do there.</p>
+    <p>When you tap through to book a flight, the app opens Virgin Atlantic's website through <strong>CJ Affiliate</strong>, an affiliate network. This link carries the installation identifier described above, so that a completed booking can be matched to the journey that led to it. We may earn a commission on bookings made this way, at no extra cost to you. Once you arrive on Virgin Atlantic's website, their own privacy policy applies to anything you do there.</p>
 
     <h3>Subscriptions</h3>
 
-    <p>Points Plus subscriptions are sold and processed entirely by <strong>Apple</strong>. We never see or receive your payment details. The App Store tells the app whether a valid subscription exists — nothing more.</p>
+    <p>Points Plus subscriptions are sold and processed entirely by <strong>Apple</strong>. We never see or receive your payment details. The App Store tells the app whether a valid subscription exists — nothing more. Our servers learn the same thing through the Apple Account link described above, so that notifications can be paused when a subscription ends.</p>
 
     <h2>What we never collect</h2>
 
@@ -98,6 +110,7 @@
       <li>Payment card or bank details</li>
       <li>Health, fitness or contacts data</li>
       <li>Photos, camera or microphone access</li>
+      <li>Motion data — the app reads the gyroscope only to animate on-screen effects, and never records or sends it</li>
       <li>Advertising identifiers — the app shows no adverts and does no ad tracking</li>
     </ul>
 
@@ -106,21 +119,21 @@
     <p>We use the following providers, each of which processes data on our behalf:</p>
 
     <ul>
-      <li><strong>Google (Firebase)</strong> — database, analytics, push notifications, crash reporting, and the AI model behind intelligent search. See <a href="https://firebase.google.com/support/privacy">Firebase's privacy information</a>.</li>
+      <li><strong>Google (Firebase)</strong> — database, analytics, push notifications, crash reporting, remote configuration, abuse prevention, and the AI model behind intelligent search. Abuse prevention uses Apple's App Attest to check that requests come from a genuine copy of the app. See <a href="https://firebase.google.com/support/privacy">Firebase's privacy information</a>.</li>
       <li><strong>PostHog</strong> — product analytics, hosted in the EU. See <a href="https://posthog.com/privacy">PostHog's privacy policy</a>.</li>
       <li><strong>CJ Affiliate</strong> — affiliate link attribution. See <a href="https://www.cj.com/legal/privacy">CJ's privacy policy</a>.</li>
-      <li><strong>Apple</strong> — App Store purchases and push notification delivery. See <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.</li>
+      <li><strong>Apple</strong> — App Store purchases, app transaction verification, and push notification delivery. See <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.</li>
     </ul>
 
     <p>We do not sell your information, and we do not share it with anyone for their own marketing.</p>
 
     <h2>Retention</h2>
 
-    <p>Alert records live until you delete the alert, or until the flights they watch have departed, whichever comes first. Analytics and crash reports are retained according to the providers' standard retention periods. Everything held on your device is erased when you delete the app.</p>
+    <p>Alert records live until you delete the alert, or until the flights they watch have departed, whichever comes first. Your installation identifier, your push notification token, and the Apple app transaction identifier held against them remain until they are replaced or until you ask us to remove them — deleting the app does not clear them, because the installation identifier survives in your device's keychain. Analytics and crash reports are retained according to the providers' standard retention periods. Your saved flights and everything else held in the app's own storage are erased when you delete the app; the installation identifier in the keychain is the one exception.</p>
 
     <h2>Your rights</h2>
 
-    <p>Depending on where you live, you may have the right to access, correct, or delete information relating to you. Because the app holds no accounts and no contact details, the practical route is to contact us and describe what you would like removed — see below. Deleting the app removes everything stored on your device immediately.</p>
+    <p>Depending on where you live, you may have the right to access, correct, or delete information relating to you. Because the app holds no accounts and no contact details, the practical route is to contact us and describe what you would like removed — see below. Deleting the app removes your saved flights and everything else in the app's own storage immediately, though the installation identifier stays in your device's keychain.</p>
 
     <h2>Children</h2>
 
@@ -128,7 +141,7 @@
 
     <h2>Changes</h2>
 
-    <p>If this policy changes, the date at the top of this page changes with it. Material changes will be noted in the app.</p>
+    <p>If this policy changes, the date at the top of this page changes with it. Material changes will be called out in the App Store release notes for the update that introduces them.</p>
 
     <h2>Contact</h2>
 
