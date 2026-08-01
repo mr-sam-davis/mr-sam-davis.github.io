@@ -1,0 +1,144 @@
+/* ============================================================
+   DOCUMENT PAGES — policies, terms, support
+   Builds on the tokens defined in style.css
+   ============================================================ */
+
+.doc {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.doc-header {
+  border-bottom: 2px solid var(--color-pink);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.doc-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-blue-mid);
+  margin-bottom: 0.5rem;
+}
+
+.doc-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.1;
+}
+
+.doc-updated {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-blue-mid);
+}
+
+
+/* ============================================================
+   BODY COPY
+   ============================================================ */
+.doc h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: 2.5rem 0 0.75rem;
+}
+
+.doc h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-navy-dark);
+  margin: 1.75rem 0 0.5rem;
+}
+
+.doc p,
+.doc li {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-body-text);
+}
+
+.doc p {
+  margin-bottom: 1rem;
+}
+
+.doc ul {
+  margin: 0 0 1.25rem 1.25rem;
+}
+
+.doc li {
+  margin-bottom: 0.4rem;
+}
+
+.doc a {
+  color: var(--color-blue-mid);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.doc a:hover {
+  color: var(--color-navy);
+}
+
+.doc code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: rgba(74, 128, 168, 0.1);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+.doc strong {
+  color: var(--color-navy-dark);
+}
+
+
+/* ============================================================
+   CALLOUT — for the things people must actually read
+   ============================================================ */
+.doc-callout {
+  background: rgba(217, 160, 184, 0.16);
+  border-left: 3px solid var(--color-pink-deep);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.doc-callout p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.doc-footer {
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(30, 54, 96, 0.15);
+  font-size: 0.9rem;
+}
+
+.doc-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.doc-footer p {
+  font-size: 0.9rem;
+  color: var(--color-blue-mid);
+  margin-bottom: 0;
+}
