@@ -1,0 +1,398 @@
+/* ============================================================
+   POINTS — app landing page
+   Themed like the app: iOS system colours and SF.
+   Builds on the reset and animations in style.css.
+   ============================================================ */
+:root {
+  /* iOS semantic colours, light */
+  --ios-grouped:         #F2F2F7;   /* systemGroupedBackground — the page */
+  --ios-card:            #FFFFFF;   /* secondarySystemGroupedBackground — the copy card */
+  --ios-label:           #000000;
+  --ios-label-2:         rgba(60, 60, 67, 0.6);
+  --ios-tint:            #DA0530;   /* the app's AccentColor, same in dark */
+
+  --stack-gap:           1.5rem;    /* body → badge, and icon → title */
+
+  --font-ios: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+              system-ui, "Helvetica Neue", Arial, sans-serif;
+
+  --phone-w:             clamp(230px, 24vw, 310px);
+  --phone-depth:         calc(var(--phone-w) * 0.0063);  /* spacing between edge layers */
+
+  /* Glacier, sampled from Apple's iPhone 18 Pro frame */
+  --metal-hue:           215;
+  --metal-sat:           24%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ios-grouped:       #000000;
+    --ios-card:          #1C1C1E;
+    --ios-label:         #FFFFFF;
+    --ios-label-2:       rgba(235, 235, 245, 0.6);
+  }
+}
+
+/* Paint the root too, so Safari never shows its own canvas colour
+   past the end of the page. */
+.points-root {
+  background-color: var(--ios-grouped);
+}
+
+.points-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  font-family: var(--font-ios);
+  background-color: var(--ios-grouped);
+  color: var(--ios-label);
+  overflow-x: hidden;   /* the tilted phone can poke past the edge */
+}
+
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "copy device";
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.5rem 2.5rem;
+}
+
+.hero-copy {
+  grid-area: copy;
+  max-width: 30rem;
+  justify-self: end;
+  /* the copy sits in one card, like the app's rows */
+  background: var(--ios-card);
+  border-radius: 1.75rem;
+  padding: 2.5rem;
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.25s;
+}
+
+.hero-device {
+  grid-area: device;
+  display: flex;
+  justify-content: center;
+  animation: fadeSlideUp 0.9s ease both;
+  animation-delay: 0.1s;
+}
+
+
+/* ============================================================
+   COPY
+   ============================================================ */
+.hero-icon {
+  display: block;
+  width: clamp(72px, 7vw, 96px);
+  height: auto;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 5.5vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  /* Match the visible body → badge gap: add the body line's space below
+     its text (~0.22rem), minus the space the title font leaves above its
+     capitals (~0.14em). Also overrides normalize.css's h1 margin. */
+  margin: calc(var(--stack-gap) + 0.22rem - 0.14em) 0 0.9rem;
+}
+
+.hero-lead {
+  font-size: clamp(1.25rem, 2vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+.hero-body {
+  font-size: 1.0625rem;   /* 17pt body */
+  line-height: 1.5;
+  color: var(--ios-label-2);
+  margin-bottom: var(--stack-gap);
+}
+
+/* paragraph spacing between body paragraphs; the last one keeps
+   --stack-gap above the badge */
+.hero-body:has(+ .hero-body) {
+  margin-bottom: 0.75em;
+}
+
+.saver {
+  /* the app's Saver asset, drawn inline */
+  display: inline-block;
+  height: 0.55em;
+  width: auto;
+  margin-right: 0.2em;
+  vertical-align: 0.05em;
+}
+
+.hero-small {
+  margin-top: 1.75rem;
+  font-size: 0.8125rem;   /* 13pt footnote */
+  line-height: 1.5;
+  color: var(--ios-label-2);
+}
+
+.hero-small a {
+  color: var(--ios-tint);
+  text-decoration: none;
+}
+
+.hero-small a:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================================================
+   FOOTER — small grey links, centred at the bottom
+   ============================================================ */
+.page-footer {
+  padding: 0 1rem 1.5rem;
+  text-align: center;
+}
+
+.page-footer nav {
+  display: inline-flex;
+  gap: 1.25rem;
+  font-size: 0.8125rem;
+}
+
+.page-footer a {
+  color: var(--ios-label-2);
+  text-decoration: none;
+}
+
+.page-footer a:hover {
+  color: var(--ios-label);
+}
+
+
+/* ============================================================
+   APP STORE BADGE — Apple's official artwork
+   ============================================================ */
+.app-store-badge {
+  display: inline-block;
+  line-height: 0;
+  border-radius: 0.6rem;
+}
+
+.app-store-badge img {
+  height: 3.25rem;   /* Apple asks for at least 40px on screen */
+  width: auto;
+}
+
+.app-store-badge:focus-visible {
+  outline: 3px solid var(--ios-tint);
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+   PHONE — 3D stage
+   Geometry is in percentages of Apple's 978×2000 device frame:
+   body 17–961 × 15–1984, screen 52–926 × 50–1950.
+   ============================================================ */
+.stage {
+  position: relative;
+  perspective: 1400px;
+  padding: 1.5rem 0;
+}
+
+/* Three nested wrappers so each motion runs on its own clock
+   and the combination never quite repeats. */
+.phone-float {
+  animation: phoneFloat 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.phone-sway {
+  animation: phoneSway 9s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.phone-roll {
+  position: relative;
+  width: var(--phone-w);
+  aspect-ratio: 978 / 2000;
+  animation: phoneRoll 7s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.phone-face {
+  position: absolute;
+  inset: 0;
+  /* sit clearly in front of the edge layers so Safari doesn't
+     re-sort them against the face mid-animation */
+  transform: translateZ(1px);
+}
+
+.phone-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.phone-edge {
+  /* the metal band: rounded rects stacked behind the face, each a
+     touch lighter or darker (--l) so the side reads as rounded */
+  position: absolute;
+  top: 0.75%;
+  bottom: 0.8%;
+  left: 1.74%;
+  right: 1.74%;
+  border-radius: 18.2% / 8.74%;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--metal-hue) var(--metal-sat) calc(var(--l) - 8%)),
+    hsl(var(--metal-hue) var(--metal-sat) var(--l)) 12%,
+    hsl(var(--metal-hue) var(--metal-sat) var(--l)) 88%,
+    hsl(var(--metal-hue) var(--metal-sat) calc(var(--l) + 6%))
+  );
+  transform: translateZ(calc(var(--i) * var(--phone-depth) * -1));
+}
+
+.phone-edge--back {
+  /* frosted back glass */
+  background: hsl(var(--metal-hue) 22% 80%);
+}
+
+.phone-screen {
+  position: absolute;
+  left: 5.2%;
+  top: 2.45%;
+  width: 89.6%;
+  height: 95.1%;
+  border-radius: 15.8% / 7.26%;
+  overflow: hidden;
+  background: var(--ios-grouped);
+  /* Safari: keeps the rounded clip stable inside a 3D transform */
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  isolation: isolate;
+}
+
+.phone-screen picture {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  /* keep every screenshot on its own layer permanently; Safari flickers
+     when layers are created and torn down inside a 3D scene */
+  will-change: opacity;
+}
+
+.phone-screen picture.is-active {
+  opacity: 1;
+}
+
+.phone-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.phone-glare {
+  /* a sheen that slides across the glass as the phone sways */
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.16) 48%,
+    transparent 60%
+  );
+  background-size: 300% 100%;
+  pointer-events: none;
+  animation: phoneGlare 9s ease-in-out infinite;
+}
+
+
+
+/* ============================================================
+   PHONE — motion
+   Screen faces left (negative rotateY), towards the copy.
+   ============================================================ */
+@keyframes phoneFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+
+@keyframes phoneSway {
+  0%, 100% { transform: rotateY(-24deg); }
+  50%      { transform: rotateY(-13deg); }
+}
+
+@keyframes phoneRoll {
+  0%, 100% { transform: rotateX(5deg) rotateZ(-3deg); }
+  50%      { transform: rotateX(8deg) rotateZ(2deg); }
+}
+
+@keyframes phoneGlare {
+  0%, 100% { background-position: 100% 0; }
+  50%      { background-position: 20% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy,
+  .hero-device,
+  .phone-float,
+  .phone-roll,
+  .phone-glare {
+    animation: none;
+  }
+
+  .phone-sway {
+    animation: none;
+    transform: rotateY(-18deg) rotateX(5deg);
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE — stacks at ≤ 800px: phone, then copy
+   ============================================================ */
+@media (max-width: 800px) {
+  :root {
+    --phone-w: min(190px, 48vw);
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "device"
+      "copy";
+    gap: 0.5rem;
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .hero-copy {
+    justify-self: stretch;
+    max-width: 34rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .stage {
+    padding: 1rem 0 1.5rem;
+  }
+
+  /* a gentler angle when centred */
+  @keyframes phoneSway {
+    0%, 100% { transform: rotateY(-16deg); }
+    50%      { transform: rotateY(-6deg); }
+  }
+}
