@@ -1,0 +1,24 @@
+# Sam Davis
+
+> Sam Davis is a UK iOS developer, iOS Team Lead at 3 Sided Cube, who also makes independent apps. This site hosts the pages for those apps.
+
+## Apps
+
+- [VS Points](https://samapps.co.uk/points/): An iPhone app for finding Virgin Atlantic reward seats worth spending Virgin Points on.
+
+## VS Points
+
+VS Points (shown as "Points" on the home screen) tracks Virgin Atlantic reward seat prices for every cabin, on every route, for every day of the 11-month booking window. It's free on the App Store, for iOS 26 and later: https://apps.apple.com/app/id6759494927
+
+- Saver seats are marked with a little red tag.
+- One-way and round-trip search, with trip length in nights.
+- Save flights and trips to come back to.
+- Price history charts: 1 or 2 weeks free, up to 11 months with Points Plus.
+- Points Plus (a monthly subscription, £4.49 / $4.49) adds price alerts (when a price drops, rises, or a saver seat appears), the full 11 months of price history, and natural-language search.
+- Made by one person, Sam Davis. Not affiliated with or endorsed by Virgin Atlantic.
+
+## Pages
+
+- [Support](https://samapps.co.uk/vs-points-support.html): Contact and troubleshooting. Email sam@samapps.co.uk.
+- [Privacy policy](https://samapps.co.uk/vs-points-privacy.html)
+- [Terms of use](https://samapps.co.uk/vs-points-terms.html)

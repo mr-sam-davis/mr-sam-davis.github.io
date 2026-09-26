@@ -13,7 +13,7 @@
   --font-display:      'Space Grotesk', sans-serif;
   --font-body:         'Space Grotesk', sans-serif;
 
-  --photo-size:        clamp(200px, 40vw, 360px);
+  --photo-size:        clamp(160px, 20vw, 240px);
   --panel-min-height:  100svh;
 }
 
@@ -59,6 +59,7 @@ body {
 }
 
 .panel--photo {
+  flex: 0 0 36%;
   background-color: var(--color-pink);
   background-image: radial-gradient(
     ellipse at center,
@@ -102,7 +103,7 @@ body {
    CONTENT
    ============================================================ */
 .content-inner {
-  max-width: 420px;
+  max-width: 540px;
   animation: fadeSlideUp 0.7s ease both;
   animation-delay: 0.25s;
 }
@@ -118,72 +119,138 @@ body {
 }
 
 .tagline {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  font-weight: 700;
-  color: var(--color-pink-deep);
-  margin-bottom: 1.25rem;
-  letter-spacing: 0.01em;
-}
-
-.bio {
-  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
-  line-height: 1.7;
-  color: var(--color-body-text);
-  margin-bottom: 2rem;
-}
-
-.link {
-  color: var(--color-blue-mid);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-  text-decoration-color: transparent;
-  transition: text-decoration-color 0.2s ease;
-}
-
-.link:hover,
-.link:focus-visible {
-  text-decoration-color: var(--color-blue-mid);
+  margin-top: 0.35rem;
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-weight: 400;
+  color: rgba(30, 54, 96, 0.7);   /* the navy, softened */
 }
 
 
 /* ============================================================
-   BUTTON
+   PORTALS — big links to my app and my work
    ============================================================ */
-.btn {
-  display: inline-block;
-  padding: 0.75rem 2rem;
-  background-color: var(--color-navy);
-  color: var(--color-cream);
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+.portals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.portal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 13rem;
+  padding: 1.4rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
   text-decoration: none;
-  border-radius: 100px;
-  border: 2px solid var(--color-navy);
-  transition:
-    background-color 0.2s ease,
-    color            0.2s ease,
-    border-color     0.2s ease,
-    transform        0.15s ease;
-  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn:hover {
-  background-color: var(--color-pink);
-  color: var(--color-navy);
-  border-color: var(--color-pink-deep);
-  transform: translateY(-2px);
+.portal:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(30, 54, 96, 0.22);
 }
 
-.btn:active {
-  transform: translateY(0);
-}
-
-.btn:focus-visible {
+.portal:focus-visible {
   outline: 3px solid var(--color-blue-mid);
   outline-offset: 3px;
+}
+
+.portal__icon {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.portal__icon--rounded {
+  /* the 3SC logo is a plain square; round it like an app icon */
+  border-radius: 22.5%;
+}
+
+.portal__text {
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.portal__text strong {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.portal__arrow {
+  position: absolute;
+  top: 1.3rem;
+  right: 1.3rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.portal--points:hover .portal__arrow {
+  transform: translateX(4px);
+}
+
+.portal--3sc:hover .portal__arrow {
+  transform: translate(3px, -3px);
+}
+
+.portal--points {
+  color: #fff;
+  /* the sky from the Points app icon */
+  background: linear-gradient(180deg, #0A96F2 0%, #3DB4FA 60%, #7FD6FF 100%);
+}
+
+.portal--3sc {
+  color: #000;
+  /* 3 Sided Cube's green and black, from their logo */
+  background: linear-gradient(180deg, #00D466 0%, #01ED71 55%, #6AF5A8 100%);
+}
+
+.portal--3sc .portal__icon {
+  /* the logo shares the tile's green, so lift it off the background */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ============================================================
+   SOCIALS — email and LinkedIn as icons
+   ============================================================ */
+.socials {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  margin-left: -0.5rem;   /* line the first icon's glyph up with the text edge */
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  color: var(--color-navy);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.social svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.social:hover {
+  color: var(--color-pink-deep);
+  background-color: rgba(217, 160, 184, 0.18);
+}
+
+.social:focus-visible {
+  outline: 3px solid var(--color-blue-mid);
+  outline-offset: 2px;
 }
 
 
@@ -206,6 +273,12 @@ body {
   .content-inner {
     animation: none;
   }
+
+  .portal,
+  .portal__arrow,
+  .social {
+    transition: none;
+  }
 }
 
 
@@ -225,9 +298,10 @@ body {
   }
 
   .profile-photo {
-    width: min(240px, 60vw);
-    height: min(240px, 60vw);
+    width: min(160px, 45vw);
+    height: min(160px, 45vw);
   }
+
 
   .panel--content {
     flex: 1;
@@ -236,6 +310,14 @@ body {
 
   .content-inner {
     max-width: 100%;
+  }
+
+  .portals {
+    grid-template-columns: 1fr;
+  }
+
+  .portal {
+    min-height: 10.5rem;   /* room for the Points icon above the text */
   }
 
   .name {
@@ -253,8 +335,8 @@ body {
   }
 
   .profile-photo {
-    width: 180px;
-    height: 180px;
+    width: 140px;
+    height: 140px;
   }
 
   .panel--content {
@@ -263,10 +345,5 @@ body {
 
   .name {
     font-size: 2.2rem;
-  }
-
-  .btn {
-    width: 100%;
-    text-align: center;
   }
 }
