@@ -4,11 +4,11 @@
 
 ## Apps
 
-- [VS Points](https://samapps.co.uk/points/): An iPhone app for finding Virgin Atlantic reward seats worth spending Virgin Points on.
+- [Points](https://samapps.co.uk/points/): An iPhone app for finding Virgin Atlantic reward seats worth spending Virgin Points on.
 
-## VS Points
+## Points
 
-VS Points (shown as "Points" on the home screen) tracks Virgin Atlantic reward seat prices for every cabin, on every route, for every day of the 11-month booking window. It's free on the App Store, for iOS 26 and later: https://apps.apple.com/app/id6759494927
+Points (listed on the App Store as "Points: reward seat finder") tracks Virgin Atlantic reward seat prices for every cabin, on every route, for every day of the 11-month booking window. It's free on the App Store, for iOS 26 and later: https://apps.apple.com/app/id6759494927
 
 - Saver seats are marked with a little red tag.
 - One-way and round-trip search, with trip length in nights.
