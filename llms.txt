@@ -8,7 +8,7 @@
 
 ## Points
 
-Points (listed on the App Store as "Points: reward seat finder") tracks Virgin Atlantic reward seat prices for every cabin, on every route, for every day of the 11-month booking window. It's free on the App Store, for iOS 26 and later: https://apps.apple.com/app/id6759494927
+Points (listed on the App Store as "Points: reward seat finder") tracks Virgin Atlantic reward seat prices for every cabin, on every route, for every day of the 11-month booking window. It's free to download from the App Store, for iOS 26 and later, with optional Points Plus subscription features (below): https://apps.apple.com/app/id6759494927
 
 - Saver seats are marked with a little red tag.
 - One-way and round-trip search, with trip length in nights.
