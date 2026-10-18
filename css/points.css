@@ -396,3 +396,120 @@
     50%      { transform: rotateY(-6deg); }
   }
 }
+
+
+/* ============================================================
+   NOTE — single-card pages: support and the legal pages
+   The landing page's copy card on its own, sized for reading.
+   A long document goes in .note-prose, which styles its bare
+   headings, paragraphs and lists.
+   ============================================================ */
+.note {
+  flex: 1;
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 2rem;
+}
+
+.note-card {
+  background: var(--ios-card);
+  border-radius: 1.75rem;
+  padding: 2.5rem;
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.1s;
+}
+
+.note-title {
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.9rem;
+}
+
+.note-card a {
+  color: var(--ios-tint);
+  text-decoration: none;
+}
+
+.note-card a:hover {
+  text-decoration: underline;
+}
+
+.note-updated {
+  font-size: 0.8125rem;   /* 13pt footnote */
+  color: var(--ios-label-2);
+  margin-bottom: 1.5rem;
+}
+
+.note-prose h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin: 2rem 0 0.5rem;
+}
+
+.note-prose h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 1.5rem 0 0.35rem;
+}
+
+.note-body,
+.note-prose p,
+.note-prose ul {
+  font-size: 1.0625rem;   /* 17pt body */
+  line-height: 1.5;
+  color: var(--ios-label-2);
+  margin-bottom: 0.75em;
+}
+
+.note-prose ul {
+  padding-left: 1.25em;
+}
+
+.note-prose li {
+  margin-bottom: 0.35em;
+}
+
+.note-prose strong {
+  font-weight: 600;
+  color: var(--ios-label);
+}
+
+/* an inset row, like a grouped cell */
+.note-callout {
+  background: var(--ios-grouped);
+  border-radius: 0.75rem;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.75em;
+}
+
+.note-callout > :last-child {
+  margin-bottom: 0;
+}
+
+.note-contact {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1rem 0 0;
+}
+
+@media (max-width: 800px) {
+  .note {
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .note-card {
+    padding: 1.75rem 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note-card {
+    animation: none;
+  }
+}
